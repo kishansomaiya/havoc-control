@@ -2,6 +2,7 @@ import { useAuth } from './auth/useAuth';
 import Map from './Views/Map';
 import Callback from './auth/callback';
 
+// We should handle routing and auth here
 function App() {
   const isCallback = window.location.pathname === '/callback';
 
