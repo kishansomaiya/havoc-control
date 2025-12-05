@@ -1,0 +1,22 @@
+locationId,latitude,longitude,locationName,streetAddress,postalCode,cityName
+1001,33.51899198398836,-86.81551219687933,"Birmingham Location 1, Alabama","873 Main St, Alabama",68531,Birmingham
+1002,61.22772093862412,-149.90453701923832,"Anchorage Location 1, Alaska","8589 Main St, Alaska",67889,Anchorage
+1003,33.458395191539836,-112.0799342050389,"Phoenix Location 1, Arizona","8677 Main St, Arizona",15874,Phoenix
+1004,34.739118696599576,-92.2912935195805,"Little Rock Location 1, Arkansas","1813 Main St, Arkansas",17943,Little Rock
+1005,34.04516985325262,-118.25175959577011,"Los Angeles Location 1, California","155 Main St, California",81289,Los Angeles
+1006,39.7472408202801,-104.99033150013598,"Denver Location 1, Colorado","1426 Main St, Colorado",81078,Denver
+1007,41.766759244892036,-72.69084258402924,"Hartford Location 1, Connecticut","4645 Main St, Connecticut",75943,Hartford
+1008,39.16570194002093,-75.53416583204356,"Dover Location 1, Delaware","8678 Main St, Delaware",33686,Dover
+1009,25.758191364494106,-80.20171655843252,"Miami Location 1, Florida","1613 Main St, Florida",14416,Miami
+1010,33.74486314195102,-84.38212754168397,"Atlanta Location 1, Georgia","1473 Main St, Georgia",28849,Atlanta
+1011,21.308540691018983,-157.86819917140343,"Honolulu Location 3, Hawaii","9532 Main St, Hawaii",40669,Honolulu
+1012,43.61363819513416,-116.20130090919646,"Boise Location 1, Idaho","4118 Main St, Idaho",63412,Boise
+1013,41.88238409836611,-87.62290552890747,"Chicago Location 1, Illinois","2452 Main St, Illinois",14986,Chicago
+1014,39.76706555509713,-86.16465392766357,"Indianapolis Location 1, Indiana","3104 Main St, Indiana",75119,Indianapolis
+1015,41.59078437017551,-93.61654874218463,"Des Moines Location 1, Iowa","5940 Main St, Iowa",94927,Des Moines
+1016,37.69305246200105,-97.32949417295089,"Wichita Location 1, Kansas","541 Main St, Kansas",36652,Wichita
+1017,38.25037507490167,-85.76703082141512,"Louisville Location 1, Kentucky","2099 Main St, Kentucky",16698,Louisville
+1018,29.94387041548666,-90.07899354617119,"New Orleans Location 1, Louisiana","5600 Main St, Louisiana",67192,New Orleans
+1019,43.66359543735621,-70.25183400208631,"Portland Location 1, Maine","5212 Main St, Maine",27049,Portland
+1020,39.292415946275874,-76.61027131642585,"Baltimore Location 1, Maryland","6880 Main St, Maryland",29320,Baltimore
+1021,42.36018738845033,-71.0616940357319,"Boston Location 1, Massachusetts","4160 Main St, Massachusetts",86462,Boston

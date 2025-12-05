@@ -1,0 +1,32 @@
+export const roleManagementTestConfig = {
+  local: {
+    appUrl: process.env.LOCAL_URL || '',
+    apiUrl: process.env.LOCAL_API_URL || '',
+    username: process.env.TEST_USERNAME || '',
+    password: process.env.TEST_PASSWORD || '',
+    readOnlyUsername: process.env.TEST_READ_ONLY_USERNAME || '',
+    readOnlyPassword: process.env.TEST_READ_ONLY_PASSWORD || '',
+    noAccessUsername: process.env.TEST_NO_ACCESS_USERNAME || '',
+    noAccessPassword: process.env.TEST_NO_ACCESS_PASSWORD || '',
+  },
+  dev: {
+    appUrl: process.env.DEV_URL || '',
+    apiUrl: process.env.DEV_API_URL || '',
+    username: process.env.TEST_USERNAME || '',
+    password: process.env.TEST_PASSWORD || '',
+    readOnlyUsername: process.env.TEST_READ_ONLY_USERNAME || '',
+    readOnlyPassword: process.env.TEST_READ_ONLY_PASSWORD || '',
+    noAccessUsername: process.env.TEST_NO_ACCESS_USERNAME || '',
+    noAccessPassword: process.env.TEST_NO_ACCESS_PASSWORD || '',
+  },
+  stg: {
+    appUrl: process.env.STG_URL || '',
+    apiUrl: process.env.STG_API_URL || '',
+    username: process.env.TEST_USERNAME || '',
+    password: process.env.TEST_PASSWORD || '',
+    readOnlyUsername: process.env.TEST_READ_ONLY_USERNAME || '',
+    readOnlyPassword: process.env.TEST_READ_ONLY_PASSWORD || '',
+    noAccessUsername: process.env.TEST_NO_ACCESS_USERNAME || '',
+    noAccessPassword: process.env.TEST_NO_ACCESS_PASSWORD || '',
+  },
+};

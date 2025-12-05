@@ -1,0 +1,388 @@
+{
+  "Flood": [
+    {
+      "value": "FL_depth10yr_mean",
+      "text": "Depth of the water (in meters) at the 10-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_depth20yr_mean",
+      "text": "Depth of the water (in meters) at the 20-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_depth50yr_mean",
+      "text": "Depth of the water (in meters) at the 50-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_depth100yr_mean",
+      "text": "Depth of the water (in meters) at the 100-year return period",
+      "default": true
+    },
+    {
+      "value": "FL_depth200yr_mean",
+      "text": "Depth of the water (in meters) at the 200-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_depth500yr_mean",
+      "text": "Depth of the water (in meters) at the 500-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_depthTidal_mean",
+      "text": "Annual depth of the water (in meters) in coastal areas due to high tides",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction10yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 10-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction20yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 20-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction50yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 50-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction100yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 100-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction200yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 200-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFraction500yr_mean",
+      "text": "Fraction of land within the 90m grid cell with flooding at the 500-year return period",
+      "default": false
+    },
+    {
+      "value": "FL_floodedFractionTidal_mean",
+      "text": "Fraction of land within the 90m grid cell inundated by high tide",
+      "default": false
+    }
+  ],
+  "Wind": [
+    {
+      "value": "WS_windSpeed10yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 10-year return period",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeed20yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 20-year return period",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeed50yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 50-year return period",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeed100yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 100-year return period",
+      "default": true
+    },
+    {
+      "value": "WS_windSpeed200yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 200-year return period",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeed500yr_mean",
+      "text": "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 500-year return period",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeedAvgAnnual_mean",
+      "text": "Average annual wind speed (in km/h)",
+      "default": false
+    },
+    {
+      "value": "WS_windSpeedMaxAnnual_mean",
+      "text": "Max wind speed (in km/h) for the year",
+      "default": false
+    }
+  ],
+  "Wildfire": [
+    {
+      "value": "FR_annualFireProbability_mean",
+      "text": "Annual probability of wildfire",
+      "default": true
+    }
+  ],
+  "Heat": [
+    {
+      "value": "HT_daysExceeding35C_mean",
+      "text": "Days per year with temperature >35C",
+      "default": true
+    },
+    {
+      "value": "HT_daysExceeding38C_mean",
+      "text": "Days per year with temperature >38C",
+      "default": false
+    },
+    {
+      "value": "HT_daysExceeding99Pct_mean",
+      "text": "Days per year with temperature exceeding the local historical 99th percentile temperature",
+      "default": false
+    },
+    {
+      "value": "HT_coolingDegreeDays_mean",
+      "text": "Annual sum of the daily mean temperature minus 18C indicating a need for air conditioning",
+      "default": false
+    },
+    {
+      "value": "HT_daysHighWBGT_mean",
+      "text": "Number of days per year where the Wet-Bulb Globe Temperature (WBGT) exceeds 32C",
+      "default": false
+    },
+    {
+      "value": "HT_daysDangerousWBGT_mean",
+      "text": "Number of days per year where the Wet-Bulb Globe Temperature (WBGT) exceeds 35C",
+      "default": false
+    },
+    {
+      "value": "HT_waveMax35CMin24C_mean",
+      "text": "Absolute heat wave: annual count of 3-day periods with high temp >35C and low temp >24C",
+      "default": false
+    },
+    {
+      "value": "HT_waveMax95Pct_mean",
+      "text": "Relative heat wave: annual count of 3-day periods with high temp > local historical 95th percentile temp",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgAnnual_mean",
+      "text": "Average annual temperature (in C)",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureMaxAnnual_mean",
+      "text": "Max temperature (in C) for the year",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgJan_mean",
+      "text": "Average temperature (in C) in January",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgFeb_mean",
+      "text": "Average temperature (in C) in February",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgMar_mean",
+      "text": "Average temperature (in C) in March",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgApr_mean",
+      "text": "Average temperature (in C) in April",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgMay_mean",
+      "text": "Average temperature (in C) in May",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgJun_mean",
+      "text": "Average temperature (in C) in June",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgJul_mean",
+      "text": "Average temperature (in C) in July",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgAug_mean",
+      "text": "Average temperature (in C) in August",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgSep_mean",
+      "text": "Average temperature (in C) in September",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgOct_mean",
+      "text": "Average temperature (in C) in October",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgNov_mean",
+      "text": "Average temperature (in C) in November",
+      "default": false
+    },
+    {
+      "value": "HT_temperatureAvgDec_mean",
+      "text": "Average temperature (in C) in December",
+      "default": false
+    }
+  ],
+  "Precip": [
+    {
+      "value": "PR_oneDayPrecip10yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 10-year return period",
+      "default": false
+    },
+    {
+      "value": "PR_oneDayPrecip20yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 20-year return period",
+      "default": false
+    },
+    {
+      "value": "PR_oneDayPrecip50yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 50-year return period",
+      "default": false
+    },
+    {
+      "value": "PR_oneDayPrecip100yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 100-year return period",
+      "default": true
+    },
+    {
+      "value": "PR_oneDayPrecip200yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 200-year return period",
+      "default": false
+    },
+    {
+      "value": "PR_oneDayPrecip500yr_mean",
+      "text": "Maximum daily total water equivalent precipitation (in mm) experienced at the 500-year return period",
+      "default": false
+    },
+    {
+      "value": "PR_precipAnnual_mean",
+      "text": "Total water equivalent precipitation (in mm) for the year",
+      "default": false
+    },
+    {
+      "value": "PR_precipJan_mean",
+      "text": "Total water equivalent precipitation (in mm) for January",
+      "default": false
+    },
+    {
+      "value": "PR_precipFeb_mean",
+      "text": "Total water equivalent precipitation (in mm) for February",
+      "default": false
+    },
+    {
+      "value": "PR_precipMar_mean",
+      "text": "Total water equivalent precipitation (in mm) for March",
+      "default": false
+    },
+    {
+      "value": "PR_precipApr_mean",
+      "text": "Total water equivalent precipitation (in mm) for April",
+      "default": false
+    },
+    {
+      "value": "PR_precipMay_mean",
+      "text": "Total water equivalent precipitation (in mm) for May",
+      "default": false
+    },
+    {
+      "value": "PR_precipJun_mean",
+      "text": "Total water equivalent precipitation (in mm) for June",
+      "default": false
+    },
+    {
+      "value": "PR_precipJul_mean",
+      "text": "Total water equivalent precipitation (in mm) for July",
+      "default": false
+    },
+    {
+      "value": "PR_precipAug_mean",
+      "text": "Total water equivalent precipitation (in mm) for August",
+      "default": false
+    },
+    {
+      "value": "PR_precipSep_mean",
+      "text": "Total water equivalent precipitation (in mm) for September",
+      "default": false
+    },
+    {
+      "value": "PR_precipOct_mean",
+      "text": "Total water equivalent precipitation (in mm) for October",
+      "default": false
+    },
+    {
+      "value": "PR_precipNov_mean",
+      "text": "Total water equivalent precipitation (in mm) for November",
+      "default": false
+    },
+    {
+      "value": "PR_precipDec_mean",
+      "text": "Total water equivalent precipitation (in mm) for December",
+      "default": false
+    }
+  ],
+  "Cold": [
+    {
+      "value": "CD_daysBelow0C_mean",
+      "text": "Days per year with temperature <0C",
+      "default": true
+    },
+    {
+      "value": "CD_daysBelowNeg10C_mean",
+      "text": "Days per year with temperature <-10C",
+      "default": false
+    },
+    {
+      "value": "CD_heatingDegreeDays_mean",
+      "text": "Annual sum of 18C minus the daily mean temperature indicating a need for heating",
+      "default": false
+    },
+    {
+      "value": "CD_waveAvgNeg5C_mean",
+      "text": "Absolute cold wave: annual count of 3-day periods with avg temp <-5C",
+      "default": false
+    },
+    {
+      "value": "CD_waveMin10Pct_mean",
+      "text": "Relative cold wave: annual count of 3-day periods with low temp < local historical 10th percentile temp",
+      "default": false
+    }
+  ],
+  "Drought": [
+    {
+      "value": "DT_monthsExtreme3moSPEI_mean",
+      "text": "Months per year where the rolling 3-month average Standardized Precipitation Evapotranspiration Index is below -2",
+      "default": false
+    },
+    {
+      "value": "DT_monthsExtreme6moSPEI_mean",
+      "text": "Months per year where the rolling 6-month average Standardized Precipitation Evapotranspiration Index is below -2",
+      "default": false
+    },
+    {
+      "value": "DT_totalWaterStress_mean",
+      "text": "Total water stress: human water demand / water supply for the local and upstream watersheds",
+      "default": true
+    }
+  ],
+  "Hail": [
+    {
+      "value": "HL_daysLargeHailPossible_mean",
+      "text": "Number of days per year where large hail (>2 in / 5 cm in diameter) is possible",
+      "default": true
+    },
+    {
+      "value": "HL_daysSevereTStormProbable_mean",
+      "text": "Number of days per year where environmental conditions are conducive to severe thunderstorm formation",
+      "default": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+locationId,latitude,longitude,locationName,streetAddress,postalCode,cityName
+10101,33.5189919839884,-86.8155121968793,"Birmingham Location 1, Alabama","873 Main St, Alabama",68531,Birmingham
+10102,61.2277209386241,-149.904537019238,"Anchorage Location 1, Alaska","8589 Main St, Alaska",67889,Anchorage
+10103,33.4583951915398,-112.079934205039,"Phoenix Location 1, Arizona","8677 Main St, Arizona",15874,Phoenix
+10104,34.7391186965996,-92.2912935195805,"Little Rock Location 1, Arkansas","1813 Main St, Arkansas",17943,Little Rock
+10105,34.0451698532526,-118.25175959577,"Los Angeles Location 1, California","155 Main St, California",81289,Los Angeles
+10106,39.7472408202801,-104.990331500136,"Denver Location 1, Colorado","1426 Main St, Colorado",81078,Denver
+10107,41.766759244892,-72.6908425840292,"Hartford Location 1, Connecticut","4645 Main St, Connecticut",75943,Hartford
+10108,39.1657019400209,-75.5341658320436,"Dover Location 1, Delaware","8678 Main St, Delaware",33686,Dover
+10109,25.7581913644941,-80.2017165584325,"Miami Location 1, Florida","1613 Main St, Florida",14416,Miami
+10110,25.7664493112212,-80.2008471644074,"Miami Location 2, Florida","5638 Main St, Florida",86577,Miami
+10111,33.744863141951,-84.382127541684,"Atlanta Location 1, Georgia","1473 Main St, Georgia",28849,Atlanta
+10112,21.3027831870969,-157.855097760194,"Honolulu Location 1, Hawaii","9228 Main St, Hawaii",35859,Honolulu
+10113,43.6136381951342,-116.201300909196,"Boise Location 1, Idaho","4118 Main St, Idaho",63412,Boise
+10114,41.8823840983661,-87.6229055289075,"Chicago Location 1, Illinois","2452 Main St, Illinois",14986,Chicago
+10115,39.7646448765574,-86.1580820410104,"Indianapolis Location 3, Indiana","1285 Main St, Indiana",94734,Indianapolis
+10116,41.5907843701755,-93.6165487421846,"Des Moines Location 1, Iowa","5940 Main St, Iowa",94927,Des Moines
+10117,37.6930524620011,-97.3294941729509,"Wichita Location 1, Kansas","541 Main St, Kansas",36652,Wichita
+10118,38.2503750749017,-85.7670308214151,"Louisville Location 1, Kentucky","2099 Main St, Kentucky",16698,Louisville
+10119,29.9438704154867,-90.0789935461712,"New Orleans Location 1, Louisiana","5600 Main St, Louisiana",67192,New Orleans
+10120,43.6635954373562,-70.2518340020863,"Portland Location 1, Maine","5212 Main St, Maine",27049,Portland
+10121,39.2924159462759,-76.6102713164259,"Baltimore Location 1, Maryland","6880 Main St, Maryland",29320,Baltimore
+10122,42.3601873884503,-71.0616940357319,"Boston Location 1, Massachusetts","4160 Main St, Massachusetts",86462,Boston
+10123,42.3331928063431,-83.0480728902062,"Detroit Location 1, Michigan","9656 Main St, Michigan",93280,Detroit
+10124,44.9815730914953,-93.2740036603857,"Minneapolis Location 3, Minnesota","2387 Main St, Minnesota",18810,Minneapolis
+10125,32.2996253402768,-90.1776786639701,"Jackson Location 1, Mississippi","5343 Main St, Mississippi",17664,Jackson
+10126,39.0944091681746,-94.5774256225555,"Kansas City Location 1, Missouri","4958 Main St, Missouri",62828,Kansas City
+10127,45.7828788225814,-108.492361079114,"Billings Location 1, Montana","6582 Main St, Montana",46491,Billings
+10128,41.2472524580463,-95.9418090922073,"Omaha Location 1, Nebraska","7932 Main St, Nebraska",79615,Omaha
+10129,36.1686309882229,-115.134381705435,"Las Vegas Location 1, Nevada","5458 Main St, Nevada",70959,Las Vegas
+10130,43.0037428277529,-71.4504157137358,"Manchester Location 1, New Hampshire","809 Main St, New Hampshire",37045,Manchester
+10131,40.7349912738603,-74.1823151349475,"Newark Location 1, New Jersey","5062 Main St, New Jersey",96135,Newark
+10132,35.0827566437077,-106.651380658348,"Albuquerque Location 1, New Mexico","7652 Main St, New Mexico",54479,Albuquerque
+10133,40.7149195907359,-74.0154895451612,"New York City Location 1, New York","5745 Main St, New York",62210,New York City
+10134,35.2189116575818,-80.8437276585599,"Charlotte Location 1, North Carolina","1301 Main St, North Carolina",68137,Charlotte
+10135,46.8672150330114,-96.7960828163634,"Fargo Location 1, North Dakota","3006 Main St, North Dakota",15114,Fargo
+10136,39.9631880407117,-82.9904359646633,"Columbus Location 1, Ohio","1939 Main St, Ohio",33966,Columbus
+10137,35.4613674772928,-97.5148651432261,"Oklahoma City Location 1, Oklahoma","3689 Main St, Oklahoma",99567,Oklahoma City
+10138,45.5137019536486,-122.678143021395,"Portland Location 1, Oregon","7690 Main St, Oregon",58202,Portland
+10139,39.9559425080579,-75.1620892561946,"Philadelphia Location 1, Pennsylvania","9504 Main St, Pennsylvania",86302,Philadelphia
+10140,41.8235292809182,-71.4204069075849,"Providence Location 1, Rhode Island","2847 Main St, Rhode Island",28356,Providence
+10141,32.7806149194261,-79.9288951262039,"Charleston Location 1, South Carolina","1733 Main St, South Carolina",95413,Charleston
+10142,43.541188431377,-96.7336145908292,"Sioux Falls Location 1, South Dakota","7780 Main St, South Dakota",60993,Sioux Falls
+10143,36.1687993847674,-86.7804948822919,"Nashville Location 1, Tennessee","1372 Main St, Tennessee",61873,Nashville
+10144,29.768875687259,-95.3752592178772,"Houston Location 1, Texas","5717 Main St, Texas",34879,Houston
+10145,40.7624272451267,-111.887681517402,"Salt Lake City Location 1, Utah","1888 Main St, Utah",42551,Salt Lake City
+10146,44.485504812274,-73.2169180950711,"Burlington Location 1, Vermont","5503 Main St, Vermont",11715,Burlington
+10147,36.8531754585251,-75.9744405642995,"Virginia Beach Location 1, Virginia","6426 Main St, Virginia",85851,Virginia Beach
+10148,47.6060236592729,-122.322257420134,"Seattle Location 1, Washington","591 Main St, Washington",23557,Seattle
+10149,38.3416760150164,-81.6293226850874,"Charleston Location 1, West Virginia","9167 Main St, West Virginia",29663,Charleston
+10150,43.0444041756858,-87.9079383846287,"Milwaukee Location 1, Wisconsin","7230 Main St, Wisconsin",51770,Milwaukee
+10151,41.1366004771825,-104.816305915135,"Cheyenne Location 1, Wyoming","4411 Main St, Wyoming",85834,Cheyenne

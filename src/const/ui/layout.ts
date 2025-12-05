@@ -1,0 +1,1 @@
+export const TOP_HEADER_HEIGHT = "3.25rem";

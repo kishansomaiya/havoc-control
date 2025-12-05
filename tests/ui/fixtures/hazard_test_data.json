@@ -1,0 +1,150 @@
+{
+  "scenarioOptions": {
+    "default": "SSP5-8.5 High GHG Emissions",
+    "names": [
+      "SSP1-2.6 Low GHG Emissions",
+      "SSP2-4.5 Middle GHG Emissions",
+      "SSP5-8.5 High GHG Emissions"
+    ],
+    "descriptions": [
+      "Assumes a strong global commitment to reducing greenhouse gas emissions, leading to low levels of warming.",
+      "Assumes moderate efforts to reduce greenhouse gas emissions and balanced outcome in terms of socio-economic development and climate change impacts.",
+      "In this scenario, greenhouse gas emissions continue to rise, leading to high levels of warming and significant climate change impacts."
+    ]
+  },
+  "yearOptions": {
+    "default": "2040",
+    "values": [
+      "2020",
+      "2025",
+      "2030",
+      "2035",
+      "2040",
+      "2045",
+      "2050",
+      "2055",
+      "2060",
+      "2065",
+      "2070",
+      "2075",
+      "2080",
+      "2085",
+      "2090",
+      "2095",
+      "2100"
+    ]
+  },
+  "metricOptions": {
+    "default": "Depth of the water (in meters) at the 100-year return period",
+    "byTab": {
+      "Flood": {
+        "values": [
+          "Depth of the water (in meters) at the 10-year return period",
+          "Depth of the water (in meters) at the 20-year return period",
+          "Depth of the water (in meters) at the 50-year return period",
+          "Depth of the water (in meters) at the 100-year return period",
+          "Depth of the water (in meters) at the 200-year return period",
+          "Depth of the water (in meters) at the 500-year return period",
+          "Annual depth of the water (in meters) in coastal areas due to high tides",
+          "Fraction of land within the 90m grid cell with flooding at the 10-year return period",
+          "Fraction of land within the 90m grid cell with flooding at the 20-year return period",
+          "Fraction of land within the 90m grid cell with flooding at the 50-year return period",
+          "Fraction of land within the 90m grid cell with flooding at the 100-year return period",
+          "Fraction of land within the 90m grid cell with flooding at the 200-year return period",
+          "Fraction of land within the 90m grid cell with flooding at the 500-year return period",
+          "Fraction of land within the 90m grid cell inundated by high tide"
+        ]
+      },
+      "Wind": {
+        "values": [
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 10-year return period",
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 20-year return period",
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 50-year return period",
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 100-year return period",
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 200-year return period",
+          "Maximum 1-minute sustained wind speed (in km/hr) experienced at the 500-year return period",
+          "Average annual wind speed (in km/h)",
+          "Max wind speed (in km/h) for the year"
+        ]
+      },
+      "Wildfire": {
+        "default": "Annual probability of wildfire",
+        "values": ["Annual probability of wildfire"]
+      },
+      "Heat": {
+        "values": [
+          "Days per year with temperature >35C",
+          "Days per year with temperature >38C",
+          "Days per year with temperature exceeding the local historical 99th percentile temperature",
+          "Annual sum of the daily mean temperature minus 18C indicating a need for air conditioning",
+          "Number of days per year where the Wet-Bulb Globe Temperature (WBGT) exceeds 32C",
+          "Number of days per year where the Wet-Bulb Globe Temperature (WBGT) exceeds 35C",
+          "Absolute heat wave: annual count of 3-day periods with high temp >35C and low temp >24C",
+          "Relative heat wave: annual count of 3-day periods with high temp > local historical 95th percentile temp",
+          "Average annual temperature (in C)",
+          "Max temperature (in C) for the year",
+          "Average temperature (in C) in January",
+          "Average temperature (in C) in February",
+          "Average temperature (in C) in March",
+          "Average temperature (in C) in April",
+          "Average temperature (in C) in May",
+          "Average temperature (in C) in June",
+          "Average temperature (in C) in July",
+          "Average temperature (in C) in August",
+          "Average temperature (in C) in September",
+          "Average temperature (in C) in October",
+          "Average temperature (in C) in November",
+          "Average temperature (in C) in December"
+        ]
+      },
+      "Precip": {
+        "values": [
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 10-year return period",
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 20-year return period",
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 50-year return period",
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 100-year return period",
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 200-year return period",
+          "Maximum daily total water equivalent precipitation (in mm) experienced at the 500-year return period",
+          "Total water equivalent precipitation (in mm) for the year",
+          "Total water equivalent precipitation (in mm) for January",
+          "Total water equivalent precipitation (in mm) for February",
+          "Total water equivalent precipitation (in mm) for March",
+          "Total water equivalent precipitation (in mm) for April",
+          "Total water equivalent precipitation (in mm) for May",
+          "Total water equivalent precipitation (in mm) for June",
+          "Total water equivalent precipitation (in mm) for July",
+          "Total water equivalent precipitation (in mm) for August",
+          "Total water equivalent precipitation (in mm) for September",
+          "Total water equivalent precipitation (in mm) for October",
+          "Total water equivalent precipitation (in mm) for November",
+          "Total water equivalent precipitation (in mm) for December"
+        ]
+      },
+      "Cold": {
+        "default": "Days per year with temperature <0C",
+        "values": [
+          "Days per year with temperature <0C",
+          "Days per year with temperature <-10C",
+          "Annual sum of 18C minus the daily mean temperature indicating a need for heating",
+          "Absolute cold wave: annual count of 3-day periods with avg temp <-5C",
+          "Relative cold wave: annual count of 3-day periods with low temp < local historical 10th percentile temp"
+        ]
+      },
+      "Drought": {
+        "default": "Total water stress: human water demand / water supply for the local and upstream watersheds",
+        "values": [
+          "Months per year where the rolling 3-month average Standardized Precipitation Evapotranspiration Index is below -2",
+          "Months per year where the rolling 6-month average Standardized Precipitation Evapotranspiration Index is below -2",
+          "Total water stress: human water demand / water supply for the local and upstream watersheds"
+        ]
+      },
+      "Hail": {
+        "default": "Number of days per year where large hail (>2 in / 5 cm in diameter) is possible",
+        "values": [
+          "Number of days per year where large hail (>2 in / 5 cm in diameter) is possible",
+          "Number of days per year where environmental conditions are conducive to severe thunderstorm formation"
+        ]
+      }
+    }
+  }
+}

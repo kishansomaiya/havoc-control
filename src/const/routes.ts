@@ -1,0 +1,35 @@
+export const ROUTES = {
+    HOMEPAGE: '/',
+    CREATE_PORTFOLIO_PAGE: '/create-portfolio',
+    EDIT_PORTFOLIO_PAGE: '/edit-portfolio/:portfolioId',
+    DUPLICATE_PORTFOLIO_PAGE: '/duplicate-portfolio/:portfolioId',
+    PORTFOLIO_PAGE: '/portfolios/:portfolioId',
+    PORTFOLIO_TABS: {
+        OVERVIEW: '',
+        COMPLIANCE: 'compliance',
+        HAZARD: 'hazard',
+        IMPACTS: 'impacts',
+        LOCATIONS: 'locations',
+        SCORING: 'scoring',
+        ADAPTATION: 'adaptation',
+    },
+    LOCATION_PAGE: `/portfolios/:portfolioId/locations/:locationId`,
+    LOCATION_TABS: {
+        HAZARD: '',
+        DAMAGE_AND_LOSS: 'damage',
+        FINANCIAL_METRICS: 'financial',
+        FLOOD_MESH: 'flood',
+    },
+    PROFILE_PAGE: `/profile`,
+    PROFILE_TABS: {
+        USER_SETTINGS: '',
+        ROLE_MANAGEMENT: 'role-management',
+        USER_GROUP_MANAGEMENT: 'user-group-management',
+        PORTFOLIO_SHARING: 'portfolio-sharing',
+    },
+    PROFILE_ROLE_CREATE_PAGE: '/profile/role-management/create-role',
+    PROFILE_ROLE_EDIT_PAGE: '/profile/role-management/:roleId/edit-role',
+    PROFILE_ROLE_EDIT_USERS_PAGE: '/profile/role-management/:roleId/edit-users',
+    PORTFOLIO_SHARING_WITH_PORTFOLIO_ID:
+        '/profile/portfolio-sharing/:portfolioId',
+};

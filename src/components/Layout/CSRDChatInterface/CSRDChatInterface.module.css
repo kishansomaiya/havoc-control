@@ -1,0 +1,16 @@
+.root {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9; /* This should have the highest z-index in entire web-app UI */
+}
+
+.chatWindow {
+    height: calc(100vh - 6rem);
+    width: 50vw;
+    max-width: 700px;
+}
+
+.headerContent {
+    background-color: inherit;
+}

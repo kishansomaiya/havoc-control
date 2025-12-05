@@ -1,0 +1,5 @@
+export const RESULT_SET_DEFAULT_YEAR_FROM = 2020;
+
+export const RESULT_SET_DEFAULT_YEAR_TO = 2040;
+
+export const RESULT_SET_MIN_YEAR_FROM = 2020;

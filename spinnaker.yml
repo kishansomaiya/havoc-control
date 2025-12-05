@@ -1,0 +1,284 @@
+apiVersion: spinnaker.io.jupiterintel.com/v1alpha1
+kind: Service
+metadata:
+  name: jupiter-csg-frontend-redux
+spec:
+  # Team and Contacts populate the relevant banners and fields in spinnaker with the contact information.
+  team: engineering
+  contacts:
+    productOwners:
+      - dylan.johnson@jupiterintel.com
+    technicalContacts:
+      - dylan.johnson@jupiterintel.com
+  description: |-
+    New CSG Frontend Application
+  # If a spinnaker application is manged, the spinnaker operator will lock the pipelines it creates so they cannot be updated within the spinnaker UI and keep them in sync with this YAML file.
+  # If this is set to false, the operator will only create pipelines and applications that do not exist. It will not update existing pipelines and will not lock them.
+  # Set managed to false if you want to be able to make changes in the spinnaker UI to your pipelines after they are generated
+  managed: true
+  # The spinnaker operator must have the roles defined here in order to create the pipelines.
+  rbac:
+    enabled: true
+    applicationPermissions:
+      read:
+        - 'app - spinnaker - io - engineering - lower'
+        - 'app - spinnaker - administrators'
+      write:
+        - 'app - spinnaker - io - engineering - lower'
+        - 'app - spinnaker - administrators'
+      execute:
+        - 'app - spinnaker - io - engineering - lower'
+        - 'app - spinnaker - administrators'
+    releasePipelineRoles:
+      - 'app - spinnaker - io - engineering - lower'
+    # Enabling deployCrd will create a pipeline in this application that deploys this CRD onto the cluster hosting the spinnaker operator.
+  deployCrd:
+    # When set to false this will delete the deploy crd pipeline if it exists
+    enabled: true
+    # The location of this CRD. It is recommended this be located within the application repository.
+    kubernetesManifest:
+      account: gitlab
+      type: gitlab/file
+      # File Path must be URL encoded.
+      ref: https://gitlab.com/api/v4/projects/59506710/repository/files/spinnaker%2Eyml/raw
+      version: main
+      trigger:
+        enabled: true
+        type: git
+        source: gitlab
+        project: jupiterintel
+        slug: jupiter-csg-frontend-redux
+        branch: main
+    # The cluster running the io-spinnaker-operator. If RBAC is enabled the pipelineRoles key must have a role that can deploy to this cluster.
+    cluster: io-tools-lower-00
+    # This is the namespace the operator is running in. Will override namespace in the manifest.
+    namespace: io-spinnaker-operator-system
+    # The role that can deploy to the cluster above
+    pipelineRoles:
+      - 'app - spinnaker - administrators'
+  notifications:
+    googleChat:
+      enabled: true
+      # This controls where deployment notifications are sent, this must be a valid chat webhook.
+      webhookURL: https://chat.googleapis.com/v1/spaces/AAAAwriRRoY/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=KOkbSlJt-7MWqbm6bzFLg9Z01wff3O83xyN-Bn_LvnI%3D
+  artifacts:
+    docker:
+      account: docker-registry
+      imageRegistry: 389773357704.dkr.ecr.us-east-1.amazonaws.com
+      imageRegistryOrganization: io-lower-eng-useast1
+      imageName: jupiter-csg-frontend-redux 
+      trigger:
+        enabled: true
+        account: aws-ecr-io-lower-389773357704
+        # Only trigger on tags starting with main
+        tag: main-.*
+    kubernetesManifest:
+      account: gitlab
+      type: gitlab/file
+      # File Path must be URL encoded.
+      ref: https://gitlab.com/api/v4/projects/59506710/repository/files/deploy%2Fk8s%2Eyml/raw
+      version: ^{trigger['resolvedExpectedArtifacts'][0]['boundArtifact']['version']}
+
+  # # Define any webhooks that will be used. These webhooks can be attached to environments pre or post deployment.
+  webhooks:
+    scan:
+      # Name is the display name of the stage
+      name: Container Security Scan
+      url: http://io-ecr-webhooks.io-webhooks/vulnerabilities
+      method: POST
+      failFastCodes:
+        - 424
+      # Define as YAML, will be converted to JSON.
+      # Note if you would like to use SPEL syntax for the payload use this format ^{spelExpression} instead of ${spelExpression}
+      payload:
+        imageName: jupiter-csg-frontend-redux
+        imageRegistry: 389773357704.dkr.ecr.us-east-1.amazonaws.com
+        imageRegistryOrganization: io-lower-eng-useast1
+        version: ^{trigger['resolvedExpectedArtifacts'][0]['boundArtifact']['version']}
+        allowedVulnerabilities:
+          CRITICAL: 0
+          HIGH: 0
+          MEDIUM: 100
+    copy:
+      # Name is the display name of the stage
+      name: Promote Image to Production
+      url: http://io-ecr-webhooks.io-webhooks/copy
+      method: POST
+      failFastCodes:
+        - 424
+      # Define as YAML, will be converted to JSON.
+      # Note if you would like to use SPEL syntax for the payload use this format ^{spelExpression} instead of ${spelExpression}
+      payload:
+        SourceRef:
+          imageName: jupiter-csg-frontend-redux
+          imageRegistry: 389773357704.dkr.ecr.us-east-1.amazonaws.com
+          imageRegistryOrganization: io-lower-eng-useast1
+          version: ^{trigger['resolvedExpectedArtifacts'][0]['boundArtifact']['version']}
+        DestRef:
+          imageName: jupiter-csg-frontend-redux
+          imageRegistry: 985980210140.dkr.ecr.us-east-1.amazonaws.com
+          imageRegistryOrganization: io-prod-eng-useast1
+          version: ^{trigger['resolvedExpectedArtifacts'][0]['boundArtifact']['version']}
+  # Define as many environments as needed. Each environment will create a separate spinnaker pipeline
+  environments:
+    # The key for an environment object acts as its name.
+    dev:
+      # Define the clusters that belong to this environment. These clusters must exist in spinnaker.
+      clusters:
+        - io-lower-eng-useast1-00
+      # Any numbers must be quoted
+      # Note if you would like to use SpEL syntax for parameters use this format ^{spelExpression} instead of ${spelExpression}
+      parameters:
+        namespace: jupiter-csg-frontend-redux-dev
+        env: dev
+        minReplicas: '1'
+        maxReplicas: '3'
+        memoryRequest: 512Mi
+        cpuRequest: 250m
+        memoryLimit: 1Gi
+        cpuLimit: 500m
+        apiGatewayHost: 'csg-redux.dev.ioinfra.net'
+        istioProxyLogLevel: debug
+        VITE_API_URL: 'https://jupiter-api.dev.ioinfra.net/api/v2'
+        VITE_IO_API_URL: 'https://io-user-service.dev.ioinfra.net/api/v1'
+        VITE_ADMIN_API_URL: 'https://jupiter-admin-service.dev.ioinfra.net'
+        VITE_AUTH0_DOMAIN: 'jupiter-io-dev.us.auth0.com'
+        VITE_AUTH0_CLIENT_ID: 'ScCMFz226R5vB3SDVb7fY8PkJV09HyeK'
+        VITE_AUTH0_API_AUDIENCE: 'https://jupiter-api.dev.ioinfra.net'
+        VITE_AUTH0_CALLBACK_URL: 'https://csg-redux.dev.ioinfra.net'
+        VITE_MAPBOX_ACCESS_TOKEN: 'pk.eyJ1IjoidHlsZXJsYW4iLCJhIjoiY2xhbGw3OHR5MDZrdjNwbnRmcXpkZWFwbSJ9.9CoOiZf1daJMl0jDiO-2-A'
+        VITE_HEAP_ANALYTICS_ID: ' ' # space as empty string will not be accepted in yml config
+        VITE_DD_ENVIRONMENT: 'dev'
+        VITE_ENVIRONMENT: 'dev'
+        VITE_AUTH0_LOGOUT_URL: ' ' 
+        VITE_THOUGHTSPOT_ENABLED: 'true'
+        VITE_FLAGSMITH_ENV_ID: 'a9PRWa4PSw8wLQqA468io3'
+      # Restrict the time this environment can be deployed to.
+      # restrictedExecutionTimeWindow:
+      #   enabled: false
+      #   startHour: 8
+      #   endHour: 17
+      # Add webhooks to this environment.
+      webhooks:
+        # Name must match the name of a webhook defined above.
+        - name: scan
+          # If true, fail the entire pipeline when a webhook stage fails.
+          required: false
+          # If true, will run the webhook stage after the deploy stages, otherwise run before.
+          post: false
+      # Define if an approval stage will be added before this environment can be deployed.
+      requireApproval: false
+      # A list of environments that this environment depends on.
+      requiredEnvironments: []
+    staging:
+      # Define the clusters that belong to this environment. These clusters must exist in spinnaker.
+      clusters:
+        - io-lower-eng-useast1-00
+      # Any numbers must be quoted
+      # Note if you would like to use SPEL syntax for parameters use this format ^{spelExpression} instead of ${spelExpression}
+      parameters:
+        namespace: jupiter-csg-frontend-redux-staging
+        env: staging
+        minReplicas: '2'
+        maxReplicas: '5'
+        memoryRequest: 512Mi
+        cpuRequest: 250m
+        memoryLimit: 1Gi
+        cpuLimit: 500m
+        apiGatewayHost: 'csg-redux.stg.ioinfra.net'
+        istioProxyLogLevel: debug
+        VITE_API_URL: 'https://jupiter-api.stg.ioinfra.net/api/v2'
+        VITE_IO_API_URL: 'https://io-user-service.stg.ioinfra.net/api/v1'
+        VITE_ADMIN_API_URL: 'https://jupiter-admin-service.stg.ioinfra.net'
+        VITE_AUTH0_DOMAIN: 'jupiter-io-stage.us.auth0.com'
+        VITE_AUTH0_CLIENT_ID: 'DYKa1EwwBNmpYIJC0LkPfL08YOEuwNu6'
+        VITE_AUTH0_API_AUDIENCE: 'https://jupiter-api.stg.ioinfra.net'
+        VITE_AUTH0_CALLBACK_URL: 'https://csg-redux.stg.ioinfra.net'
+        VITE_MAPBOX_ACCESS_TOKEN: 'pk.eyJ1IjoidHlsZXJsYW4iLCJhIjoiY2xhbGw3OHR5MDZrdjNwbnRmcXpkZWFwbSJ9.9CoOiZf1daJMl0jDiO-2-A'
+        VITE_HEAP_ANALYTICS_ID: ' ' # space as empty string will not be accepted in yml config
+        VITE_DD_ENVIRONMENT: 'staging'
+        VITE_ENVIRONMENT: 'stage'
+        VITE_AUTH0_LOGOUT_URL: ' '
+        VITE_THOUGHTSPOT_ENABLED: 'false'
+        VITE_FLAGSMITH_ENV_ID: '4XSn54NiJSVS85ihiR4gty'
+      # Restrict the time this environment can be deployed to.
+      # restrictedExecutionTimeWindow:
+      #   enabled: false
+      #   startHour: 8
+      #   endHour: 17
+      # Add webhooks to this environment.
+      webhooks:
+        # Name must match the name of a webhook defined above.
+        - name: scan
+          # If true, fail the entire pipeline when a webhook stage fails.
+          required: false
+          # If true, will run the webhook stage after the deploy stages, otherwise run before.
+          post: false
+      # Define if an approval stage will be added before this environment can be deployed.
+      requireApproval: true
+      # A list of environments that this environment depends on.
+      requiredEnvironments:
+        - dev
+    prod:
+      # Define the clusters that belong to this environment. These clusters must exist in spinnaker.
+      clusters:
+        - io-prod-eng-useast1-00
+      artifacts:
+        docker:
+          enabled: true
+          account: docker-registry
+          imageRegistry: 985980210140.dkr.ecr.us-east-1.amazonaws.com
+          imageRegistryOrganization: io-prod-eng-useast1
+          imageName: jupiter-csg-frontend-redux
+          version: ^{trigger['resolvedExpectedArtifacts'][0]['boundArtifact']['version']}
+      # Any numbers must be quoted
+      # Note if you would like to use SPEL syntax for parameters use this format ^{spelExpression} instead of ${spelExpression}
+      parameters:
+        namespace: jupiter-csg-frontend-redux-prod
+        env: prod
+        minReplicas: '3'
+        maxReplicas: '9'
+        memoryRequest: 512Mi
+        cpuRequest: 250m
+        memoryLimit: 1Gi
+        cpuLimit: 500m
+        apiGatewayHost: 'csg.jupiterintel.com'
+        istioProxyLogLevel: debug
+        VITE_API_URL: 'https://api.jupiterintel.com/api/v2'
+        VITE_IO_API_URL: 'https://io-user-service.jupiterintel.com/api/v1'
+        VITE_ADMIN_API_URL: 'https://admin-api.jupiterintel.com'
+        VITE_AUTH0_DOMAIN: 'jupiter-io-prod.us.auth0.com'               
+        VITE_AUTH0_CLIENT_ID: 'rjOP5Bc8icyFiQhyZLAHScrdbdP6ltnZ'        
+        VITE_AUTH0_API_AUDIENCE: 'https://api.jupiterintel.com'
+        VITE_AUTH0_CALLBACK_URL: 'https://csg.jupiterintel.com'
+        VITE_MAPBOX_ACCESS_TOKEN: 'pk.eyJ1IjoidHlsZXJsYW4iLCJhIjoiY2xhbGw3OHR5MDZrdjNwbnRmcXpkZWFwbSJ9.9CoOiZf1daJMl0jDiO-2-A'
+        VITE_HEAP_ANALYTICS_ID: '611639892'
+        VITE_DD_ENVIRONMENT: 'prod'
+        VITE_ENVIRONMENT: 'prod'
+        VITE_AUTH0_LOGOUT_URL: ' '
+        VITE_THOUGHTSPOT_ENABLED: 'false'
+        VITE_FLAGSMITH_ENV_ID: 'Hdcqa5QbxVMPSiZzBGPkMG'
+      # Restrict the time this environment can be deployed to.
+      # restrictedExecutionTimeWindow:
+      #   enabled: false
+      #   startHour: 8
+      #   endHour: 17
+      # Add webhooks to this environment.
+      webhooks:
+        # Name must match the name of a webhook defined above.
+        - name: scan
+          # If true, fail the entire pipeline when a webhook stage fails.
+          required: false
+          # If true, will run the webhook stage after the deploy stages, otherwise run before.
+          post: false
+          index: 0
+        - name: copy
+          required: true
+          post: false
+          index: 1
+      # Define if an approval stage will be added before this environment can be deployed.
+      requireApproval: true
+      # A list of environments that this environment depends on.
+      requiredEnvironments:
+        - dev
+        - staging

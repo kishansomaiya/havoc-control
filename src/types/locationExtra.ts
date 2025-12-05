@@ -1,0 +1,35 @@
+export interface ILocationExtra {
+    admin1Code?: string;
+    admin1Name?: string;
+    admin2Name?: string;
+    annualGrowth?: number;
+    annualVolatility?: number;
+    basementCode?: number;
+    buildingValue?: number;
+    cityName?: string;
+    contentsValue?: number;
+    coolingSystemProbability?: number;
+    countryCodeISO2A?: string;
+    discountRate?: number;
+    downtimeValue: 400000;
+    electricityCost_usd?: number;
+    financialBaseYear: 2020;
+    firstFloorElevation?: number;
+    floorArea_sqm?: number;
+    inventoryValue?: number;
+    locationName?: string;
+    numberOfStories?: number;
+    occupancyCode?: number;
+    occupancyName?: string;
+    occupancyScheme?: string;
+    postalCode?: number;
+    remoteWorkRatio?: number;
+    salesMargin?: number;
+    streetAddress?: string;
+    streetAddress2?: string;
+    subIndustryCode?: string;
+    subIndustryName?: string;
+    totalValue?: number;
+    valueCurrencyCode?: string;
+    workIntensity?: string;
+}

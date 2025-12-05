@@ -1,0 +1,21 @@
+{
+  "perilDataParameters": {
+    "Perils": "Cold, Combined Flood, Drought, Wildfire, Hail, Heat, Precipitation, Wind",
+    "Scenarios": "Baseline, SSP1-2.6, SSP2-4.5, SSP5-8.5",
+    "Years": "1995, 2020, 2025, 2030, 2035, 2040, 2045, 2050, 2055, 2060, 2065, 2070, 2075, 2080, 2085, 2090, 2095, 2100",
+    "Flood Defense Enabled": "Yes",
+    "Adjusted Depths for Protected": "Yes"
+  },
+  "scoresParameters": {
+    "Scores": "All Perils, Cold, Flood, Drought, Wildfire, Hail, Heat, Precip, Wind",
+    "Benchmarking Enabled": "Yes",
+    "Levels": "Country, Admin 1"
+  },
+  "economicImpactsParameters": {
+    "Shadow Price Ratio": "-",
+    "Annual Growth Rate": "-",
+    "Annual Volatility Rate": "-",
+    "Sales Margin": "-",
+    "Discount Rate": "-"
+  }
+}

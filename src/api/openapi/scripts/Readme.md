@@ -1,0 +1,1 @@
+run ``sh generate-types-ts-fetch.sh ../schemas ../auto-generated`` in this folder.

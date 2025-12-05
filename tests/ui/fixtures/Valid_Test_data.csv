@@ -1,0 +1,4 @@
+﻿locationId,latitude,longitude,totalValue,buildingValue,contentsValue,inventoryValue,occupancyScheme,occupancyCode,basementCode,numberOfStories
+10,38.21294329,-107.2376707,,1000000,1000000,1000000,ATC,12,0,2
+11,38.11294329,-106.2376707,,1000000,1000000,1000000,ATC,12,0,2
+12,38.51294329,-106.2376707,,1000000,1000000,1000000,ATC,12,0,2

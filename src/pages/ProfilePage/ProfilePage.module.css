@@ -1,0 +1,15 @@
+.root {
+    width: 100%;
+    height: calc(100vh - 3.3rem);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.noScroll {
+    overflow: hidden;
+}

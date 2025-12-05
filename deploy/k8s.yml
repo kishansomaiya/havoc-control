@@ -1,0 +1,298 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "${ parameters.canonicalName }"
+  namespace: "${ parameters.namespace }"
+  annotations:
+    "moniker.spinnaker.io/stack": "${ parameters.env }"
+  labels:
+    name: "${ parameters.canonicalName }"
+    tags.datadoghq.com/env: "${ parameters.env }"
+    tags.datadoghq.com/service: "${ parameters.canonicalName }"
+    tags.datadoghq.com/version: "${trigger.artifacts.$[type == 'docker/image'].version}"
+spec:
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: "${ parameters.canonicalName }"
+  template:
+    metadata:
+      annotations:
+        "ad.datadoghq.com/${ parameters.canonicalName }.logs": '[{ "service":"${ parameters.canonicalName }", "source":"${ parameters.canonicalName }.${ parameters.env }" }]'
+        "ad.datadoghq.com/${ parameters.canonicalName }.tags": '{ "canonicalName":"${ parameters.canonicalName }", "env":"${ parameters.env }", "version": "${ trigger.artifacts.$[type == "docker/image"].version }"}'
+        "apm.datadoghq.com/env": '{ "DD_ENV": "${ parameters.env }", "DD_SERVICE": "${ parameters.canonicalName }", "DD_VERSION": "${ trigger.artifacts.$[type == "docker/image"].version }"}'
+      labels:
+        app: "${ parameters.canonicalName }"
+        version: "${trigger.artifacts.$[type == 'docker/image'].version}"
+        tags.datadoghq.com/env: "${ parameters.env }"
+        tags.datadoghq.com/service: "${ parameters.canonicalName }"
+        tags.datadoghq.com/version: "${ trigger.artifacts.$[type == 'docker/image'].version }"
+        sidecar.istio.io/agentLogLevel: "${ parameters.istioProxyLogLevel ?: info }"
+    spec:
+      containers:
+        - name: "${ parameters.canonicalName }"
+          image: "${ parameters.dockerArtifactRef }"
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "${ parameters.memoryRequest }"
+              cpu: "${ parameters.cpuRequest }"
+            limits:
+              memory: "${ parameters.memoryLimit }"
+              cpu: "${ parameters.cpuLimit }"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+            initialDelaySeconds: 7
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
+            initialDelaySeconds: 7
+          # using secrets as a file from pod e.g. mount secrets into standard location at
+          # /etc/snowflake/snqwflake.conf instead of environment variables?
+          env:
+            - name: ENV
+              value: "${ parameters.env }"
+            - name: VITE_API_URL
+              value: "${ parameters.VITE_API_URL }"
+            - name: VITE_IO_API_URL
+              value: "${ parameters.VITE_IO_API_URL }"
+            - name: VITE_ADMIN_API_URL
+              value: "${ parameters.VITE_ADMIN_API_URL }"
+            - name: VITE_AUTH0_DOMAIN
+              value: "${ parameters.VITE_AUTH0_DOMAIN }"
+            - name: VITE_AUTH0_CLIENT_ID
+              value: "${ parameters.VITE_AUTH0_CLIENT_ID }"
+            - name: VITE_AUTH0_API_AUDIENCE
+              value: "${ parameters.VITE_AUTH0_API_AUDIENCE }"
+            - name: VITE_AUTH0_CALLBACK_URL
+              value: "${ parameters.VITE_AUTH0_CALLBACK_URL }"
+            - name: VITE_MAPBOX_ACCESS_TOKEN
+              value: "${ parameters.VITE_MAPBOX_ACCESS_TOKEN }"
+            - name: VITE_HEAP_ANALYTICS_ID
+              value: "${ parameters.VITE_HEAP_ANALYTICS_ID }"
+            - name: VITE_DD_ENVIRONMENT
+              value: "${ parameters.VITE_DD_ENVIRONMENT }"
+            - name: VITE_ENVIRONMENT
+              value: "${ parameters.VITE_ENVIRONMENT }"
+            - name: VITE_THOUGHTSPOT_ENABLED
+              value: "${ parameters.VITE_THOUGHTSPOT_ENABLED }"
+            - name: VITE_FLAGSMITH_ENV_ID
+              value: "${ parameters.VITE_FLAGSMITH_ENV_ID }"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: "${ parameters.canonicalName }"
+  namespace: "${ parameters.namespace }"
+spec:
+  maxReplicas: "${ #toInt( parameters.maxReplicas ) }"
+  minReplicas: "${ #toInt( parameters.minReplicas ) }"
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: "${ parameters.canonicalName }"
+  targetCPUUtilizationPercentage: 50
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "${ parameters.canonicalName }"
+  labels:
+    app: "${ parameters.canonicalName }"
+  namespace: "${ parameters.namespace }"
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: 3000
+  selector:
+    app: "${ parameters.canonicalName }"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: "${ parameters.canonicalName }"
+  namespace: "${ parameters.namespace }"
+  labels:
+    app: "${ parameters.canonicalName }"
+spec:
+  host: "${ parameters.canonicalName }"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+    - name: v1
+      labels:
+        version: "${trigger.artifacts.$[type == 'docker/image'].version}"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: "${ parameters.canonicalName }"
+  namespace: "${ parameters.namespace }"
+  labels:
+    app: "${ parameters.canonicalName }"
+spec:
+  hosts:
+    - "${ parameters.apiGatewayHost }"
+  gateways:
+    - istio-system/default-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: "${ parameters.canonicalName }"
+            subset: v1
+          weight: 100
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: "${ parameters.canonicalName }-security-headers"
+  namespace: "${ parameters.namespace }"
+spec:
+  workloadSelector:
+    labels:
+      app: "${ parameters.canonicalName }"
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_INBOUND # Apply the filter to inbound traffic at the sidecar
+        listener:
+          filterChain:
+            filter:
+              name: envoy.filters.network.http_connection_manager
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.filters.http.lua
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+            inlineCode: |
+              function envoy_on_response(response_handle)
+                function parse_csp_header(csp_header)
+                  local csp_table = {}
+                  -- Split the header into directives and values using semicolon
+                  for directive in csp_header:gmatch("([^;]+)") do
+                    -- Trim whitespace around the directive
+                    directive = directive:match("^%s*(.-)%s*$")
+                    -- Split the directive and its value at the first space
+                    local key, value = directive:match("([^%s]+)%s*(.*)")
+                    if key then
+                      csp_table[key] = value and value:match("^%s*(.-)%s*$") or ""
+                    end
+                  end
+
+                  return csp_table
+                end
+
+                function tableToString(tbl)
+                  local result = {}
+                  for key, value in pairs(tbl) do
+                    table.insert(result, value ~= "" and (key .. " " .. value) or key)
+                  end
+                  return table.concat(result, "; ") .. ";"
+                end
+
+                function mergeTablesWithoutOverwriting(table1, table2)
+                  for key, value in pairs(table2) do
+                    if table1[key] == nil then
+                      table1[key] = value
+                    end
+                  end
+                end
+
+                -- Content-Security-Policy Header
+                local csp_policies = {
+                  ["default-src"] = "'self' https://*.jupiterintel.com https://*.ioinfra.net",
+                  ["script-src"] = "'self' 'unsafe-inline' 'unsafe-eval' https://*.jupiterintel.com https://*.ioinfra.net https://browser-intake-datadoghq.com https://cdn.heapanalytics.com https://heapanalytics.com https://cdn.us.heap-api.com",
+                  ["connect-src"] = "'self' https://*.jupiterintel.com https://*.ioinfra.net https://*.auth0.com https://edge.api.flagsmith.com https://api.mapbox.com https://events.mapbox.com https://browser-intake-datadoghq.com data: https://heapanalytics.com https://c.us.heap-api.com",
+                  ["img-src"] = "'self' data: blob: https://*.jupiterintel.com https://*.ioinfra.net https://api.mapbox.com https://heapanalytics.com",
+                  ["object-src"] = "'none'",
+                  ["form-action"] = "'self'",
+                  ["font-src"] = "'self' data: https://heapanalytics.com",
+                  ["worker-src"] = "'self' blob:",
+                  ["style-src"] = "'self' 'unsafe-inline' https://heapanalytics.com",
+                  ["base-uri"] = "'self'",
+                  ["upgrade-insecure-requests"] = "",
+                  ["frame-ancestors"] = "'none'",
+                }
+
+                local csp_header = response_handle:headers():get("Content-Security-Policy")
+                local csp_table = {}
+
+                if csp_header then
+                  csp_table = parse_csp_header(csp_header)
+                  mergeTablesWithoutOverwriting(csp_table, csp_policies)
+                else
+                  csp_table = csp_policies
+                end
+
+                csp_header = tableToString(csp_table)
+                response_handle:headers():replace("Content-Security-Policy", csp_header)
+
+                -- X-Frame-Options Header
+                if not response_handle:headers():get("X-Frame-Options") then
+                  response_handle:headers():add("X-Frame-Options", "DENY")
+                end
+
+                -- Strict-Transport-Security (HSTS) Header
+                if not response_handle:headers():get("Strict-Transport-Security") then
+                  response_handle:headers():add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
+                else
+                  response_handle:headers():replace("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
+                end
+
+                -- X-Content-Type-Options Header
+                if not response_handle:headers():get("X-Content-Type-Options") then
+                  response_handle:headers():add("X-Content-Type-Options", "nosniff")
+                end
+
+                -- X-Permitted-Cross-Domain-Policies Header
+                if not response_handle:headers():get("X-Permitted-Cross-Domain-Policies") then
+                  response_handle:headers():add("X-Permitted-Cross-Domain-Policies", "none")
+                end
+
+                -- Referrer-Policy Header
+                if not response_handle:headers():get("Referrer-Policy") then
+                  response_handle:headers():add("Referrer-Policy", "strict-origin")
+                end
+
+                -- Cross-Origin-Opener-Policy
+                if not response_handle:headers():get("Cross-Origin-Opener-Policy") then
+                  response_handle:headers():add("Cross-Origin-Opener-Policy", "same-origin")
+                end
+
+                -- Permissions-Policy
+                if not response_handle:headers():get("Permissions-Policy") then
+                  response_handle:headers():add(
+                    "Permissions-Policy",
+                    "accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(),magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(self), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(self), clipboard-write=(self), gamepad=(), hid=(), idle-detection=(), interest-cohort=(), serial=(),unload=()"
+                  )
+                end
+              end

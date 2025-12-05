@@ -1,0 +1,4932 @@
+components:
+  schemas:
+    Claims:
+      additionalProperties: false
+      properties:
+        'custom:jupiter-roles':
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        'custom:jupiter-tenant-display-name':
+          type: string
+        'custom:jupiter-tenant-id':
+          type: string
+        'custom:jupiter-tenant-name':
+          type: string
+        'custom:jupiter-user-id':
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        namespaced:
+          $ref: '#/components/schemas/NamespacedClaims'
+      required:
+        - 'custom:jupiter-tenant-name'
+        - 'custom:jupiter-tenant-display-name'
+        - 'custom:jupiter-tenant-id'
+        - 'custom:jupiter-user-id'
+        - 'custom:jupiter-roles'
+        - namespaced
+      type: object
+    CreateClientInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateClientInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          type: string
+        machine_user_id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+      type: object
+    CreateClientOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateClientOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        client:
+          $ref: '#/components/schemas/M2MClient'
+        message:
+          type: string
+      required:
+        - message
+        - client
+      type: object
+    CreateGroupInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateGroupInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          type: string
+        members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        name:
+          type: string
+        tenant_id:
+          type: string
+      required:
+        - name
+        - tenant_id
+      type: object
+    CreateMachineUserInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateMachineUserInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        tenant_id:
+          type: string
+      required:
+        - name
+        - tenant_id
+      type: object
+    CreateRoleInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateRoleInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Optional description explaining the purpose and scope of this role
+          type: string
+        is_default:
+          default: false
+          description: >-
+            If true, this role will be used as the default role for new users.
+            Overrides existing default role.
+          type: boolean
+        members:
+          description: >-
+            List of user IDs to initially assign to this role. Must contain
+            unique items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        name:
+          description: Unique identifier for the role within a tenant
+          type: string
+        relations:
+          description: >-
+            List of permissions and capabilities granted by this role. Must
+            contain unique items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        tenant_id:
+          description: The tenant this role belongs to and will be scoped within
+          type: string
+      required:
+        - name
+        - tenant_id
+      type: object
+    CreateTenantInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateTenantInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        display_name:
+          type: string
+        domains:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        name:
+          type: string
+        provision:
+          default: true
+          type: boolean
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        type:
+          default: app
+          enum:
+            - app
+            - trial
+          type: string
+      required:
+        - name
+        - display_name
+      type: object
+    CreateUserInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CreateUserInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        email_address:
+          type: string
+        first_name:
+          type: string
+        invite:
+          type: boolean
+        last_name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        tenant_id:
+          type: string
+      required:
+        - email_address
+        - tenant_id
+      type: object
+    CustomTokenResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/CustomTokenResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        creation_time_in_millis:
+          format: int64
+          type: integer
+        expiration_time_in_millis:
+          format: int64
+          type: integer
+        id:
+          type: string
+        org:
+          $ref: '#/components/schemas/TsOrg'
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/TsUser'
+      required:
+        - id
+        - token
+        - org
+        - user
+        - creation_time_in_millis
+        - expiration_time_in_millis
+      type: object
+    DailyUsageMetrics:
+      additionalProperties: false
+      properties:
+        category_name:
+          type: string
+        date:
+          format: date-time
+          type: string
+        tenant_id:
+          type: string
+        total_executions:
+          format: int64
+          type: integer
+        total_portfolios:
+          format: int64
+          type: integer
+        total_result_sets:
+          format: int64
+          type: integer
+        total_unique_locations:
+          format: int64
+          type: integer
+        total_unique_users:
+          format: int64
+          type: integer
+        user_id:
+          type: string
+      required:
+        - date
+        - total_unique_locations
+        - total_portfolios
+        - total_executions
+        - total_unique_users
+        - total_result_sets
+      type: object
+    DeleteClientOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/DeleteClientOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+      required:
+        - message
+      type: object
+    DeleteMachineUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/DeleteMachineUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        machine_user:
+          $ref: '#/components/schemas/MachineUser'
+        message:
+          type: string
+        run_id:
+          type: string
+        workflow_id:
+          type: string
+      required:
+        - machine_user
+        - workflow_id
+        - run_id
+        - message
+      type: object
+    DeleteTenantOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/DeleteTenantOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        run_id:
+          type: string
+        tenant:
+          $ref: '#/components/schemas/Tenant'
+        workflow_id:
+          type: string
+      required:
+        - tenant
+        - workflow_id
+        - run_id
+        - message
+      type: object
+    DeleteUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/DeleteUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        run_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        workflow_id:
+          type: string
+      required:
+        - user
+        - workflow_id
+        - run_id
+        - message
+      type: object
+    ErrorDetail:
+      additionalProperties: false
+      properties:
+        location:
+          description: >-
+            Where the error occurred, e.g. 'body.items[3].tags' or
+            'path.thing-id'
+          type: string
+        message:
+          description: Error message text
+          type: string
+        value:
+          description: The value at the given location
+      type: object
+    ErrorModel:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/ErrorModel.json'
+          format: uri
+          readOnly: true
+          type: string
+        detail:
+          description: >-
+            A human-readable explanation specific to this occurrence of the
+            problem.
+          examples:
+            - Property foo is required but is missing.
+          type: string
+        errors:
+          description: Optional list of individual error details
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type:
+            - array
+            - 'null'
+        instance:
+          description: >-
+            A URI reference that identifies the specific occurrence of the
+            problem.
+          examples:
+            - 'https://example.com/error-log/abc123'
+          format: uri
+          type: string
+        status:
+          description: HTTP status code
+          examples:
+            - 400
+          format: int64
+          type: integer
+        title:
+          description: >-
+            A short, human-readable summary of the problem type. This value
+            should not change between occurrences of the error.
+          examples:
+            - Bad Request
+          type: string
+        type:
+          default: 'about:blank'
+          description: A URI reference to human-readable documentation for the error.
+          examples:
+            - 'https://example.com/errors/example'
+          format: uri
+          type: string
+      type: object
+    GetClientCredentialsOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetClientCredentialsOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+      required:
+        - client_id
+        - client_secret
+      type: object
+    GetClientOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetClientOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        auth0_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        machine_user_id:
+          type: string
+        name:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        user_id:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - id
+        - tenant_id
+        - created_at
+      type: object
+    GetDoc360TokenOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetDoc360TokenOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        token:
+          type: string
+      required:
+        - token
+      type: object
+    GetGroupOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetGroupOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        group:
+          $ref: '#/components/schemas/Group'
+        members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - group
+        - members
+      type: object
+    GetMachineUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetMachineUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - last_activity
+      type: object
+    GetMachineUserPermissionsOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - >-
+              https://example.com/schemas/GetMachineUserPermissionsOutputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        permissions:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - permissions
+      type: object
+    GetRoleOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetRoleOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        role_relations:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - role
+        - members
+        - role_relations
+      type: object
+    GetThoughtSpotTokenInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetThoughtSpotTokenInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        pipeline_ids:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        portfolio_ids:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        result_set_ids:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      type: object
+    GetUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        auth0_user_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        delete_protected:
+          type:
+            - boolean
+            - 'null'
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        email_address:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        last_name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - delete_protected
+      type: object
+    GetUserPermissionsOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GetUserPermissionsOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        permissions:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - permissions
+      type: object
+    GlobalPlatformRelations:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/GlobalPlatformRelations.json'
+          format: uri
+          readOnly: true
+          type: string
+        admin:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        manager:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        reader:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - admin
+        - manager
+        - reader
+      type: object
+    Group:
+      additionalProperties: false
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - id
+        - tenant_id
+        - created_at
+      type: object
+    GroupResponse:
+      additionalProperties: false
+      properties:
+        group:
+          $ref: '#/components/schemas/Group'
+        members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - group
+        - members
+      type: object
+    HandleGroupOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleGroupOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        group:
+          $ref: '#/components/schemas/GroupResponse'
+        message:
+          type: string
+      required:
+        - message
+        - group
+      type: object
+    HandleMachineUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleMachineUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        machine_user:
+          $ref: '#/components/schemas/MachineUser'
+        message:
+          type: string
+      required:
+        - message
+        - machine_user
+      type: object
+    HandleRoleOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleRoleOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        role:
+          $ref: '#/components/schemas/RoleResponse'
+      required:
+        - message
+        - role
+      type: object
+    HandleTenantOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleTenantOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        tenant:
+          $ref: '#/components/schemas/Tenant'
+      required:
+        - message
+        - tenant
+      type: object
+    HandleTenantResponseOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleTenantResponseOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        tenant:
+          $ref: '#/components/schemas/TenantResponse'
+      required:
+        - message
+        - tenant
+      type: object
+    HandleUserOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/HandleUserOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - message
+        - user
+      type: object
+    InputClient:
+      additionalProperties: false
+      properties:
+        client_id:
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    InputOrganization:
+      additionalProperties: false
+      properties:
+        display_name:
+          type: string
+        id:
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    InputUser:
+      additionalProperties: false
+      properties:
+        app_metadata:
+          additionalProperties:
+            type: string
+          type: object
+        email:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        user_id:
+          type: string
+        user_metadata:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+        - email
+      type: object
+    LoginFlowInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/LoginFlowInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        client:
+          $ref: '#/components/schemas/InputClient'
+        organization:
+          $ref: '#/components/schemas/InputOrganization'
+        user:
+          $ref: '#/components/schemas/InputUser'
+      required:
+        - user
+      type: object
+    LoginFlowOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/LoginFlowOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        claims:
+          $ref: '#/components/schemas/Claims'
+      required:
+        - claims
+      type: object
+    M2MClient:
+      additionalProperties: false
+      properties:
+        auth0_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        machine_user_id:
+          type: string
+        name:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        user_id:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - id
+        - tenant_id
+        - created_at
+      type: object
+    M2MFlowInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/M2MFlowInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        client:
+          $ref: '#/components/schemas/M2MFlowInputClient'
+      type: object
+    M2MFlowInputClient:
+      additionalProperties: false
+      properties:
+        client_id:
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      required:
+        - client_id
+      type: object
+    M2MFlowOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/M2MFlowOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        claims:
+          $ref: '#/components/schemas/Claims'
+      required:
+        - claims
+      type: object
+    MachineUser:
+      additionalProperties: false
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - last_activity
+      type: object
+    NamespacedClaims:
+      additionalProperties: false
+      properties:
+        'https://www.jupiterintel.com/jwt/claims/roles':
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        'https://www.jupiterintel.com/jwt/claims/tenant_id':
+          type: string
+        'https://www.jupiterintel.com/jwt/claims/user_id':
+          type: string
+      required:
+        - 'https://www.jupiterintel.com/jwt/claims/user_id'
+        - 'https://www.jupiterintel.com/jwt/claims/tenant_id'
+        - 'https://www.jupiterintel.com/jwt/claims/roles'
+      type: object
+    OutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/OutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          description: Health Check
+          examples:
+            - OK
+          type: string
+      required:
+        - message
+      type: object
+    PaginatedClientResult:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedClientResult.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/M2MClient'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PaginatedGroupResultResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedGroupResultResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/GroupResponse'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PaginatedMachineUserResult:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedMachineUserResult.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/MachineUser'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PaginatedRoleResultResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedRoleResultResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/RoleResponse'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PaginatedTenantResultResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedTenantResultResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/TenantResponse'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PaginatedUserResult:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PaginatedUserResult.json'
+          format: uri
+          readOnly: true
+          type: string
+        has_next_page:
+          type: boolean
+        items:
+          items:
+            $ref: '#/components/schemas/User'
+          type:
+            - array
+            - 'null'
+        next_cursor:
+          type: string
+      required:
+        - items
+        - next_cursor
+        - has_next_page
+      type: object
+    PreUserRegistrationFlowInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PreUserRegistrationFlowInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        client:
+          $ref: '#/components/schemas/InputClient'
+        user:
+          $ref: '#/components/schemas/PreUserRegistrationFlowInputUser'
+      type: object
+    PreUserRegistrationFlowInputUser:
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+      required:
+        - email
+      type: object
+    PreUserRegistrationFlowOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/PreUserRegistrationFlowOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+      required:
+        - message
+      type: object
+    Role:
+      additionalProperties: false
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        is_default:
+          type: boolean
+        name:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - id
+        - tenant_id
+        - name
+        - created_at
+        - updated_at
+      type: object
+    RoleResponse:
+      additionalProperties: false
+      properties:
+        members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        role_relations:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - role
+        - members
+        - role_relations
+      type: object
+    SyncSnowflakeOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/SyncSnowflakeOutputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        message:
+          type: string
+        run_id:
+          type: string
+        workflow_id:
+          type: string
+      required:
+        - workflow_id
+        - run_id
+        - message
+      type: object
+    Tenant:
+      additionalProperties: false
+      properties:
+        auth0_org_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        delete_protected:
+          type:
+            - boolean
+            - 'null'
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        display_name:
+          type: string
+        domains:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        type:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - created_at
+        - updated_at
+        - delete_protected
+        - deleted_at
+      type: object
+    TenantResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/TenantResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        admins:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        auth0_org_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        delete_protected:
+          type:
+            - boolean
+            - 'null'
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        display_name:
+          type: string
+        domains:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        type:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - admins
+        - created_at
+        - updated_at
+        - delete_protected
+        - deleted_at
+      type: object
+    TsOrg:
+      additionalProperties: false
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    TsUser:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    UpdateGroupInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateGroupInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          type: string
+      type: object
+    UpdateGroupRelationsInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateGroupRelationsInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        add_members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        remove_members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+      type: object
+    UpdateMachineUserInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateMachineUserInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+      type: object
+    UpdatePlatformRelationInput:
+      additionalProperties: false
+      properties:
+        add_members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        relation:
+          enum:
+            - admin
+            - manager
+            - reader
+          type: string
+        remove_members:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+      required:
+        - relation
+      type: object
+    UpdateRelationsResponse:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateRelationsResponse.json'
+          format: uri
+          readOnly: true
+          type: string
+        relations:
+          $ref: '#/components/schemas/GlobalPlatformRelations'
+        token:
+          type: string
+      required:
+        - relations
+        - token
+      type: object
+    UpdateRoleInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateRoleInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: >-
+            Optional updated description explaining the purpose and scope of
+            this role
+          type: string
+        is_default:
+          default: false
+          description: >-
+            If true, this role will be used as the default role for new users.
+            Overrides existing default role.
+          type: boolean
+      type: object
+    UpdateRoleRelationsInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateRoleRelationsInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        add_members:
+          description: List of user IDs to assign to this role. Must contain unique items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        add_relations:
+          description: >-
+            List of new permissions and capabilities to grant to this role. Must
+            contain unique items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        remove_members:
+          description: >-
+            List of user IDs to unassign from this role. Must contain unique
+            items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        remove_relations:
+          description: >-
+            List of existing permissions and capabilities to revoke from this
+            role. Must contain unique items.
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+      type: object
+    UpdateTenantAdminsInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateTenantAdminsInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        add_admins:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        remove_admins:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+      type: object
+    UpdateTenantInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateTenantInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        delete_protected:
+          type: boolean
+        display_name:
+          type: string
+        domains:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+        type:
+          enum:
+            - app
+            - trial
+          type: string
+      type: object
+    UpdateUserInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UpdateUserInputBody.json'
+          format: uri
+          readOnly: true
+          type: string
+        delete_protected:
+          type: boolean
+        first_name:
+          type: string
+        last_name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+          uniqueItems: true
+      type: object
+    UsageSummaryMetrics:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - 'https://example.com/schemas/UsageSummaryMetrics.json'
+          format: uri
+          readOnly: true
+          type: string
+        category_name:
+          type: string
+        date_range:
+          type: string
+        tenant_id:
+          type: string
+        total_executions:
+          format: int64
+          type: integer
+        total_portfolios:
+          format: int64
+          type: integer
+        total_result_sets:
+          format: int64
+          type: integer
+        total_unique_locations:
+          format: int64
+          type: integer
+        total_unique_users:
+          format: int64
+          type: integer
+        user_id:
+          type: string
+      required:
+        - date_range
+        - total_unique_locations
+        - total_portfolios
+        - total_executions
+        - total_unique_users
+        - total_result_sets
+      type: object
+    User:
+      additionalProperties: false
+      properties:
+        auth0_user_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        delete_protected:
+          type:
+            - boolean
+            - 'null'
+        deleted_at:
+          type: string
+        deleted_by:
+          type: string
+        email_address:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: string
+        last_activity:
+          format: date-time
+          type: string
+        last_name:
+          type: string
+        roles:
+          items:
+            type: string
+          type:
+            - array
+            - 'null'
+        status:
+          type: string
+        tenant_id:
+          type: string
+        updated_at:
+          type: string
+        updated_by:
+          type: string
+        zed_token:
+          type: string
+      required:
+        - delete_protected
+      type: object
+  securitySchemes:
+    jwt:
+      flows:
+        clientCredentials:
+          authorizationUrl: 'https://jupiter-io-dev.us.auth0.com/oauth/authorize'
+          scopes: {}
+          tokenUrl: 'https://jupiter-io-dev.us.auth0.com/oauth/token'
+      type: oauth2
+    scopes:
+      flows:
+        clientCredentials:
+          authorizationUrl: 'https://jupiter-io-dev.us.auth0.com/oauth/authorize'
+          scopes:
+            'create:flows': Run Flows
+          tokenUrl: 'https://jupiter-io-dev.us.auth0.com/oauth/token'
+      type: oauth2
+info:
+  title: Jupiter Admin Service
+  version: 1.0.0
+openapi: 3.1.0
+paths:
+  /api/v1/clients:
+    get:
+      description: Lists clients
+      operationId: ListClient
+      parameters:
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Filter by User ID
+          explode: false
+          in: query
+          name: user_id
+          schema:
+            description: Filter by User ID
+            type: string
+        - description: Filter by Machine User ID
+          explode: false
+          in: query
+          name: machine_user_id
+          schema:
+            description: Filter by Machine User ID
+            type: string
+        - description: Filter by Tenant ID
+          explode: false
+          in: query
+          name: tenant_id
+          schema:
+            description: Filter by Tenant ID
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedClientResult'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Clients
+      tags:
+        - M2MClient
+    post:
+      description: Creates a new client
+      operationId: CreateClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClientOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create Client
+      tags:
+        - M2MClient
+  '/api/v1/clients/{id}':
+    delete:
+      description: Deletes a client
+      operationId: DeleteClient
+      parameters:
+        - description: The ID of the client to delete
+          in: path
+          name: id
+          required: true
+          schema:
+            description: The ID of the client to delete
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClientOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete Client
+      tags:
+        - M2MClient
+    get:
+      description: Gets a client
+      operationId: GetClient
+      parameters:
+        - description: The ID of the client
+          in: path
+          name: id
+          required: true
+          schema:
+            description: The ID of the client
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Client
+      tags:
+        - M2MClient
+  '/api/v1/clients/{id}/credentials':
+    get:
+      description: Gets a client's credentials
+      operationId: GetClientCredentials
+      parameters:
+        - description: The ID of the client
+          in: path
+          name: id
+          required: true
+          schema:
+            description: The ID of the client
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientCredentialsOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Client Credentials
+      tags:
+        - M2MClient
+  /api/v1/flows/login:
+    post:
+      description: Auth0 Login Flow
+      operationId: LoginFlow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginFlowInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginFlowOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - scopes:
+            - 'create:flows'
+      summary: Login Flow
+      tags:
+        - Flow
+  /api/v1/flows/m2m:
+    post:
+      description: Auth0 Machine to Machine Flow
+      operationId: M2MFlow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/M2MFlowInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/M2MFlowOutputBody'
+          description: OK
+          headers:
+            RateLimit-Remaining:
+              schema:
+                format: int64
+                type: integer
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - scopes:
+            - 'create:flows'
+      summary: Machine to Machine Flow
+      tags:
+        - Flow
+  /api/v1/flows/preuser:
+    post:
+      description: Auth0 Pre User Registration Flow
+      operationId: PreUserRegistrationFlow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreUserRegistrationFlowInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreUserRegistrationFlowOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - scopes:
+            - 'create:flows'
+      summary: Pre User Registration Flow
+      tags:
+        - Flow
+  /api/v1/groups:
+    get:
+      description: Lists Groups
+      operationId: ListGroups
+      parameters:
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Filter by Tenant ID
+          explode: false
+          in: query
+          name: tenant_id
+          schema:
+            description: Filter by Tenant ID
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupResultResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Groups
+      tags:
+        - Group
+    post:
+      description: Creates a new group
+      operationId: CreateGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleGroupOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create Group
+      tags:
+        - Group
+  '/api/v1/groups/{id}':
+    delete:
+      description: Deletes a Group
+      operationId: DeleteGroup
+      parameters:
+        - description: UserID of the group
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the group
+            type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete Group
+      tags:
+        - Group
+    get:
+      description: Gets a Group
+      operationId: GetGroup
+      parameters:
+        - description: UserID of the group
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the group
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a Group
+      tags:
+        - Group
+    put:
+      description: Updates a Group
+      operationId: UpdateGroup
+      parameters:
+        - description: UserID of the group
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the group
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleGroupOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Group
+      tags:
+        - Group
+  '/api/v1/groups/{id}/relations':
+    put:
+      description: Updates a group's relations
+      operationId: UpdateGroupRelations
+      parameters:
+        - description: UserID of the group
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the group
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupRelationsInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleGroupOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Group Relations
+      tags:
+        - Group
+  /api/v1/machine_users:
+    get:
+      description: Lists Machine Users
+      operationId: ListMachineUsers
+      parameters:
+        - description: Include Deleted Machine Users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include Deleted Machine Users
+            type: boolean
+        - description: Filter by Tenant ID
+          explode: false
+          in: query
+          name: tenant_id
+          schema:
+            description: Filter by Tenant ID
+            type: string
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMachineUserResult'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Machine User
+      tags:
+        - MachineUser
+    post:
+      description: Creates a new machine user
+      operationId: CreateMachineUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMachineUserInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create Machine User
+      tags:
+        - MachineUser
+  '/api/v1/machine_users/{id}':
+    delete:
+      description: Deletes a Machine User
+      operationId: DeleteMachineUser
+      parameters:
+        - description: id of the machine user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the machine user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete Machine User
+      tags:
+        - MachineUser
+    get:
+      description: Gets a Machine User
+      operationId: GetMachineMachineUser
+      parameters:
+        - description: id of the machine user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the machine user
+            type: string
+        - description: Include deleted users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include deleted users
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a Machine User
+      tags:
+        - MachineUser
+    put:
+      description: Updates a Machine User
+      operationId: UpdateMachineUser
+      parameters:
+        - description: id of the machine user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the machine user
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMachineUserInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Machine User
+      tags:
+        - MachineUser
+  '/api/v1/machine_users/{id}/disable':
+    post:
+      description: Disables a Machine User
+      operationId: DisableMachineUser
+      parameters:
+        - description: id of the machine user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the machine user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Disable Machine User
+      tags:
+        - MachineUser
+  '/api/v1/machine_users/{id}/enable':
+    post:
+      description: Enables a Machine User
+      operationId: EnableMachineUser
+      parameters:
+        - description: id of the machine user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the machine user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleMachineUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Enable Machine User
+      tags:
+        - MachineUser
+  '/api/v1/machine_users/{id}/permissions':
+    get:
+      description: Gets a Machine User's Permissions
+      operationId: GetMachineUserPermissions
+      parameters:
+        - description: Id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Id of the user
+            type: string
+        - description: Include deleted users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include deleted users
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMachineUserPermissionsOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a Machine User's Permissions
+      tags:
+        - MachineUser
+  /api/v1/platform/global/relations:
+    get:
+      description: Get a the global platform relations.
+      operationId: GetGlobalPlatformRelations
+      parameters:
+        - explode: false
+          in: query
+          name: token
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalPlatformRelations'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Global Relations
+      tags:
+        - Platform
+    post:
+      description: Updates the global platform relations.
+      operationId: UpdateGlobalPlatformRelations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/UpdatePlatformRelationInput'
+              type:
+                - array
+                - 'null'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRelationsResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Global Relations
+      tags:
+        - Platform
+  /api/v1/role_relations:
+    get:
+      description: Lists Role Relations
+      operationId: ListRoleRelations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Roles Relations
+      tags:
+        - Role
+  /api/v1/roles:
+    get:
+      description: Lists Roles
+      operationId: ListRoles
+      parameters:
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Filter by Tenant ID
+          explode: false
+          in: query
+          name: tenant_id
+          schema:
+            description: Filter by Tenant ID
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRoleResultResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Roles
+      tags:
+        - Role
+    post:
+      description: Creates a new role
+      operationId: CreateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleRoleOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create Role
+      tags:
+        - Role
+  '/api/v1/roles/{id}':
+    delete:
+      description: Deletes a Role
+      operationId: DeleteRole
+      parameters:
+        - description: UserID of the role
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the role
+            type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete Role
+      tags:
+        - Role
+    get:
+      description: Gets a Role
+      operationId: GetRole
+      parameters:
+        - description: UserID of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoleOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a Role
+      tags:
+        - Role
+    put:
+      description: Updates a Role
+      operationId: UpdateRole
+      parameters:
+        - description: Unique identifier of the role to be updated
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Unique identifier of the role to be updated
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleRoleOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Role
+      tags:
+        - Role
+  '/api/v1/roles/{id}/relations':
+    put:
+      description: Updates a role's relations
+      operationId: UpdateRoleRelations
+      parameters:
+        - description: Unique identifier of the role whose relations will be modified
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Unique identifier of the role whose relations will be modified
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRelationsInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleRoleOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Role Relations
+      tags:
+        - Role
+  /api/v1/snowflake/sync:
+    post:
+      description: Runs Sync Snowflake Workflow
+      operationId: SyncSnowflake
+      parameters:
+        - explode: false
+          in: query
+          name: reprovision
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncSnowflakeOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Sync Snowflake
+      tags:
+        - Tenant
+  /api/v1/tenants:
+    get:
+      description: Lists Tenants
+      operationId: ListTenants
+      parameters:
+        - description: Include Deleted Users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include Deleted Users
+            type: boolean
+        - description: Filter by Type
+          explode: false
+          in: query
+          name: type
+          schema:
+            description: Filter by Type
+            enum:
+              - app
+              - trial
+            type: string
+        - description: Filter by Status
+          explode: false
+          in: query
+          name: status
+          schema:
+            description: Filter by Status
+            enum:
+              - pending
+              - failed
+              - ready
+              - disabled
+              - pending_delete
+              - failed_delete
+            type: string
+        - description: >-
+            Filter by Tenant Name. Allows direct matching or querying using the
+            * operator.
+          example: 'test, *test *test*'
+          explode: false
+          in: query
+          name: name
+          schema:
+            description: >-
+              Filter by Tenant Name. Allows direct matching or querying using
+              the * operator.
+            examples:
+              - 'test, *test *test*'
+            type: string
+        - description: >-
+            Filter by the Tenant's Domain Name. Allows direct matching or
+            querying using the * operator.
+          example: 'test, *test *test*'
+          explode: false
+          in: query
+          name: domain
+          schema:
+            description: >-
+              Filter by the Tenant's Domain Name. Allows direct matching or
+              querying using the * operator.
+            examples:
+              - 'test, *test *test*'
+            type: string
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTenantResultResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Tenants
+      tags:
+        - Tenant
+    post:
+      description: Creates a new tenant
+      operationId: CreateTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantResponseOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create Tenant
+      tags:
+        - Tenant
+  '/api/v1/tenants/{id}':
+    delete:
+      description: Deletes a Tenant
+      operationId: DeleteTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTenantOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete Tenant
+      tags:
+        - Tenant
+    get:
+      description: Gets a Tenant
+      operationId: GetTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+        - description: include deleted tenants
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: include deleted tenants
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a Tenant
+      tags:
+        - Tenant
+    put:
+      description: Updates a Tenant
+      operationId: UpdateTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantResponseOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Tenant
+      tags:
+        - Tenant
+  '/api/v1/tenants/{id}/admins':
+    put:
+      description: Updates a Tenant Admins
+      operationId: UpdateTenantAdmins
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantAdminsInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantResponseOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update Tenant Admins
+      tags:
+        - Tenant
+  '/api/v1/tenants/{id}/disable':
+    post:
+      description: Disables a Tenant
+      operationId: DisableTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Disable Tenant
+      tags:
+        - Tenant
+  '/api/v1/tenants/{id}/enable':
+    post:
+      description: Enables a Tenant
+      operationId: EnableTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Enable Tenant
+      tags:
+        - Tenant
+  '/api/v1/tenants/{id}/provision':
+    post:
+      description: Provisions a Tenant
+      operationId: ProvisionTenant
+      parameters:
+        - description: id of the tenant
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the tenant
+            type: string
+        - description: force reprovision of the tenant
+          explode: false
+          in: query
+          name: reprovision
+          schema:
+            description: force reprovision of the tenant
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleTenantResponseOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Provision Tenant
+      tags:
+        - Tenant
+  /api/v1/usage/categories/daily:
+    get:
+      description: >-
+        Get daily usage metrics for all categories across all tenants (admin
+        only)
+      operationId: GetAllCategoriesDailyUsage
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for All Categories
+      tags:
+        - Usage
+  /api/v1/usage/tenants/categories/summary:
+    get:
+      description: >-
+        Get aggregated usage summary metrics for all categories across all
+        tenants (admin only)
+      operationId: GetAllCategoriesSummary
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UsageSummaryMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Summary for All Categories Across All Tenants
+      tags:
+        - Usage
+  /api/v1/usage/tenants/categories/summary/csv:
+    get:
+      description: >-
+        Export aggregated usage summary metrics for all categories across all
+        tenants as CSV file (admin only)
+      operationId: GetAllCategoriesSummaryCSV
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Summary CSV for All Categories Across All Tenants
+      tags:
+        - UsageExport
+  /api/v1/usage/tenants/daily:
+    get:
+      description: Get daily usage metrics across all tenants (admin only)
+      operationId: GetAllTenantsDailyUsage
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for All Tenants
+      tags:
+        - Usage
+  /api/v1/usage/tenants/daily/csv:
+    get:
+      description: Export all tenants daily usage as CSV file (admin only)
+      operationId: GetAllTenantsDailyUsageCSV
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get All Tenants Daily Usage CSV
+      tags:
+        - UsageExport
+  /api/v1/usage/tenants/summary:
+    get:
+      description: Get aggregated usage metrics across all tenants (admin only)
+      operationId: GetAllTenantsUsageSummary
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UsageSummaryMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Usage Summary for All Tenants
+      tags:
+        - Usage
+  /api/v1/usage/tenants/summary/csv:
+    get:
+      description: Export all tenants usage summary as CSV file (admin only)
+      operationId: GetAllTenantsUsageSummaryCSV
+      parameters:
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get All Tenants Usage Summary CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{id}/categories/daily':
+    get:
+      description: Get daily usage metrics for all categories within a specific tenant
+      operationId: GetTenantCategoriesDailyUsage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for All Categories in Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/categories/daily/csv':
+    get:
+      description: Export tenant categories daily usage as CSV file
+      operationId: GetTenantCategoriesDailyUsageCSV
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Tenant Categories Daily Usage CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{id}/categories/summary':
+    get:
+      description: >-
+        Get aggregated usage summary metrics for all categories within a
+        specific tenant
+      operationId: GetTenantCategoriesSummary
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UsageSummaryMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Categories Summary for Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/categories/summary/csv':
+    get:
+      description: Export tenant categories summary as CSV file
+      operationId: GetTenantCategoriesSummaryCSV
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Tenant Categories Summary CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{id}/categories/{category_name}/daily':
+    get:
+      description: Get daily usage metrics for a specific category within a tenant
+      operationId: GetTenantCategoryDailyUsage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: category_name
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for Tenant Category
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/categories/{category_name}/summary':
+    get:
+      description: Get aggregated usage metrics for a specific category within a tenant
+      operationId: GetTenantCategoryUsageSummary
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: category_name
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummaryMetrics'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Usage Summary for Tenant Category
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/daily':
+    get:
+      description: Get daily usage metrics for a specific tenant over a period of time
+      operationId: GetTenantDailyUsage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/daily/csv':
+    get:
+      description: Export tenant daily usage as CSV file
+      operationId: GetTenantDailyUsageCSV
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Tenant Daily Usage CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{id}/summary':
+    get:
+      description: Get aggregated usage metrics for a specific tenant over a period of time
+      operationId: GetTenantUsageSummary
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummaryMetrics'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Usage Summary for Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/summary/csv':
+    get:
+      description: Export tenant usage summary as CSV file
+      operationId: GetTenantUsageSummaryCSV
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Tenant Usage Summary CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{id}/users/daily':
+    get:
+      description: Get daily usage metrics for all users within a specific tenant
+      operationId: GetTenantUsersDailyUsage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for All Users in Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/users/summary':
+    get:
+      description: >-
+        Get aggregated usage summary metrics for all users within a specific
+        tenant
+      operationId: GetTenantUsersSummary
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UsageSummaryMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Users Summary for Tenant
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{id}/users/summary/csv':
+    get:
+      description: >-
+        Export aggregated usage summary metrics for all users within a specific
+        tenant as CSV file
+      operationId: GetTenantUsersSummaryCSV
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Tenant Users Summary CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/categories/{category_name}/daily':
+    get:
+      description: Get daily usage metrics for a specific user within a specific category
+      operationId: GetUserCategoryDailyUsage
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: category_name
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for User Category
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/categories/{category_name}/summary':
+    get:
+      description: >-
+        Get aggregated usage metrics for a specific user within a specific
+        category
+      operationId: GetUserCategoryUsageSummary
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: category_name
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummaryMetrics'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Usage Summary for User Category
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/daily':
+    get:
+      description: Get daily usage metrics for a specific user within a tenant
+      operationId: GetUserDailyUsage
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DailyUsageMetrics'
+                type:
+                  - array
+                  - 'null'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Daily Usage for User
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/daily/csv':
+    get:
+      description: Export user daily usage as CSV file
+      operationId: GetUserDailyUsageCSV
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get User Daily Usage CSV
+      tags:
+        - UsageExport
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/summary':
+    get:
+      description: Get aggregated usage metrics for a specific user within a tenant
+      operationId: GetUserUsageSummary
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummaryMetrics'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Usage Summary for User
+      tags:
+        - Usage
+  '/api/v1/usage/tenants/{tenant_id}/users/{user_id}/summary/csv':
+    get:
+      description: Export user usage summary as CSV file
+      operationId: GetUserUsageSummaryCSV
+      parameters:
+        - in: path
+          name: tenant_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - explode: false
+          in: query
+          name: start_time
+          schema:
+            format: date-time
+            type: string
+        - explode: false
+          in: query
+          name: end_time
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get User Usage Summary CSV
+      tags:
+        - UsageExport
+  /api/v1/users:
+    get:
+      description: Lists Users
+      operationId: ListUsers
+      parameters:
+        - description: Include Deleted Users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include Deleted Users
+            type: boolean
+        - description: Filter by Tenant ID
+          explode: false
+          in: query
+          name: tenant_id
+          schema:
+            description: Filter by Tenant ID
+            type: string
+        - description: Filter by Status
+          explode: false
+          in: query
+          name: status
+          schema:
+            description: Filter by Status
+            enum:
+              - pending
+              - failed
+              - ready
+              - invited
+              - disabled
+              - pending_delete
+              - failed_delete
+            type: string
+        - description: >-
+            Filter by Email Address. Allows direct matching or querying using
+            the * operator.
+          example: 'test.com, *test.com *test*'
+          explode: false
+          in: query
+          name: email_address
+          schema:
+            description: >-
+              Filter by Email Address. Allows direct matching or querying using
+              the * operator.
+            examples:
+              - 'test.com, *test.com *test*'
+            type: string
+        - description: Add Zed Token
+          explode: false
+          in: query
+          name: zed_token
+          schema:
+            description: Add Zed Token
+            type: string
+        - description: Cursor for Pagination
+          explode: false
+          in: query
+          name: cursor
+          schema:
+            description: Cursor for Pagination
+            type: string
+        - description: Size of the Page
+          explode: false
+          in: query
+          name: page_size
+          schema:
+            description: Size of the Page
+            format: int64
+            type: integer
+        - description: Sort order for Pagination
+          explode: false
+          in: query
+          name: sort_order
+          schema:
+            description: Sort order for Pagination
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserResult'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: List Users
+      tags:
+        - User
+    post:
+      description: Creates a new user
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Create User
+      tags:
+        - User
+  '/api/v1/users/{id}':
+    delete:
+      description: Deletes a User
+      operationId: DeleteUser
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Delete User
+      tags:
+        - User
+    get:
+      description: Gets a User
+      operationId: GetUser
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+        - description: Include deleted users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include deleted users
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a User
+      tags:
+        - User
+    put:
+      description: Updates a User
+      operationId: UpdateUser
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Update User
+      tags:
+        - User
+  '/api/v1/users/{id}/disable':
+    post:
+      description: Disables a User
+      operationId: DisableUser
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Disable User
+      tags:
+        - User
+  '/api/v1/users/{id}/doc360_token':
+    get:
+      description: Gets a Doc360 token for a User
+      operationId: GetDoc360Token
+      parameters:
+        - description: UserID of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: UserID of the user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDoc360TokenOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get Doc360 Token
+      tags:
+        - User
+  '/api/v1/users/{id}/enable':
+    post:
+      description: Enables a User
+      operationId: EnableUser
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandleUserOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Enable User
+      tags:
+        - User
+  '/api/v1/users/{id}/permissions':
+    get:
+      description: Gets a User's Permissions
+      operationId: GetUserPermissions
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+        - description: Include deleted users
+          explode: false
+          in: query
+          name: deleted
+          schema:
+            description: Include deleted users
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserPermissionsOutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get a User's Permissions
+      tags:
+        - User
+  '/api/v1/users/{id}/thoughtspot_token':
+    post:
+      description: Gets a ThoughtSpot token for a TsUser
+      operationId: GetThoughtSpotToken
+      parameters:
+        - description: id of the user
+          in: path
+          name: id
+          required: true
+          schema:
+            description: id of the user
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetThoughtSpotTokenInputBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTokenResponse'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      security:
+        - jwt: []
+      summary: Get ThoughtSpot Token
+      tags:
+        - User
+  /ready:
+    get:
+      operationId: GetHealth
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputBody'
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      summary: Health Check
+      tags:
+        - Health
